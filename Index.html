@@ -1,478 +1,357 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardical Books</title>
-<style>
-  /* WEB 1.0 STYLE SHEET 
-     - High contrast borders
-     - Simple fonts (Arial/Verdana)
-     - distinct separation of areas
-  */
-  body {
-    font-family: 'Arial', 'Helvetica', sans-serif;
-    background-color: #f0f2f5; /* Light grey background from screenshots */
-    margin: 0;
-    padding: 20px;
-    color: #000;
-  }
+    <title>Cardical Books</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 1px solid #333;
+            padding: 10px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .nav {
+            border: 1px solid #333;
+            padding: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            gap: 15px;
+        }
+        .nav a {
+            text-decoration: none;
+            color: #333;
+        }
+        .about-section {
+            border: 1px solid #333;
+            background-color: #eee;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .featured-books {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .book-grid {
+            display: flex;
+            justify-content: space-around;
+        }
+        .book-item {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: center;
+            width: 150px;
+            background-color: #eee;
+            cursor: pointer;
+        }
+        .book-item img {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #333;
+            margin-bottom: 5px;
+        }
+        .footer {
+            border-top: 1px solid #333;
+            padding-top: 10px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            background-color: #ccc;
+            padding: 10px;
+        }
+        .footer a {
+            text-decoration: none;
+            color: #333;
+        }
 
-  /* Container to center the "website" like a monitor screen */
-  .page-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    border: 2px solid #000;
-    padding: 0;
-  }
+        /* Page 2 Specific Styles */
+        .shop-content {
+            display: flex;
+        }
+        .sidebar {
+            width: 200px;
+            border: 1px solid #333;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        .product-list {
+            flex-grow: 1;
+            border: 1px solid #333;
+            padding: 10px;
+        }
+        .product-item {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-bottom: 5px;
+            background-color: #eee;
+        }
+        .newsletter {
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid #333;
+            padding: 10px;
+            background-color: #eee;
+        }
+        .newsletter input[type="email"] {
+            border: 1px solid #333;
+            padding: 5px;
+        }
+        .newsletter button {
+            border: 1px solid #333;
+            background-color: #666;
+            color: #fff;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .testimonials {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .breadcrumb {
+            margin-bottom: 10px;
+        }
 
-  /* --- HEADER SECTION --- */
-  header {
-    border-bottom: 2px solid #000;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  .cart-area {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .cart-box {
-    width: 40px;
-    height: 20px;
-    border: 1px solid #000;
-    background: #e0e0e0;
-  }
-
-  /* --- NAVIGATION BAR --- */
-  nav {
-    background-color: #e6e6e6; /* Grey nav bar */
-    border-bottom: 2px solid #000;
-    padding: 10px 20px;
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    font-size: 14px;
-  }
-
-  nav a {
-    text-decoration: none;
-    color: #000;
-    cursor: pointer;
-  }
-  
-  nav a:hover {
-    text-decoration: underline;
-  }
-
-  .arrow-icon {
-    font-weight: bold;
-    font-size: 18px;
-  }
-
-  /* --- COMMON LAYOUT HELPERS --- */
-  .content-padding {
-    padding: 20px;
-  }
-
-  h1, h2, h3 {
-    margin-top: 0;
-  }
-
-  /* Button Styling (Web 1.0 style) */
-  .btn {
-    background-color: #555;
-    color: white;
-    border: 2px solid #000;
-    padding: 10px 20px;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .btn:hover {
-    background-color: #333;
-  }
-
-  /* --- IMAGE BOX / LINK STYLES --- */
-  /* This handles your request: "boxes should contain an area image but also be a button" */
-  .img-link-box {
-    display: block; /* Makes the anchor tag a block element */
-    border: 2px solid #000;
-    text-decoration: none; /* No underline on the image */
-    color: #000;
-    background-color: #fff;
-    transition: background-color 0.2s;
-  }
-
-  .img-link-box:hover {
-    background-color: #f9f9f9;
-    border-color: #555;
-  }
-
-  .placeholder-img {
-    width: 100%;
-    height: 150px; /* Default height */
-    background-color: #f0f0f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #888;
-    font-style: italic;
-    border-bottom: 1px solid #000;
-  }
-
-  /* --- HOME PAGE SPECIFICS --- */
-  .hero-text {
-    background-color: #f0f0f0;
-    padding: 20px;
-    margin-bottom: 30px;
-    font-size: 14px;
-    line-height: 1.4;
-  }
-
-  .featured-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 40px;
-    text-align: center;
-  }
-  
-  .featured-label {
-    padding: 10px;
-    font-weight: bold;
-  }
-
-  /* --- SHOP PAGE SPECIFICS --- */
-  .shop-layout {
-    display: flex;
-    border: 2px solid #000; /* The outer border seen in screenshot 2 */
-    min-height: 400px;
-  }
-
-  .shop-sidebar {
-    width: 30%;
-    background-color: #eee;
-    padding: 20px;
-    border-right: 2px solid #000;
-  }
-
-  .shop-main {
-    width: 70%;
-    padding: 20px;
-    /* The purple box representation */
-    border: 4px solid #9d8cff; 
-    margin: 10px;
-  }
-
-  .newsletter-box {
-    border: 2px solid #000;
-    padding: 20px;
-    margin-top: 20px;
-    text-align: center;
-  }
-  
-  .input-field {
-    padding: 8px;
-    border: 1px solid #000;
-    background: #eee;
-    width: 200px;
-  }
-
-  /* --- PRODUCT PAGE SPECIFICS --- */
-  .product-top {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 30px;
-  }
-
-  .product-img-large {
-    width: 250px;
-    height: 300px;
-    border: 2px solid #000;
-    background-color: #f0f0f0;
-  }
-
-  .product-info {
-    flex: 1;
-  }
-
-  .stars { font-size: 24px; }
-
-  .reviews-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-
-  .review-box {
-    height: 100px;
-    border: 2px solid #000;
-    background: #f0f0f0;
-  }
-
-  .related-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-  }
-
-  /* --- FOOTER --- */
-  footer {
-    border: 2px solid #000;
-    background-color: #d9d9d9;
-    padding: 20px;
-    display: flex;
-    justify-content: space-around;
-    margin: 20px; /* Inset margin like screenshot */
-    font-weight: bold;
-  }
-
-  /* Utility to hide/show pages */
-  .page-section {
-    display: none; /* Hidden by default */
-  }
-  
-  .active-page {
-    display: block;
-  }
-
-</style>
+        /* Page 3 Specific Styles */
+        .book-detail-content {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .book-image-large {
+            border: 1px solid #333;
+            width: 200px;
+            height: 250px;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eee;
+        }
+        .book-info {
+            flex-grow: 1;
+        }
+        .book-info h2 {
+            margin-top: 0;
+        }
+        .stars {
+            color: gold;
+        }
+        .add-to-cart {
+            background-color: #666;
+            color: #fff;
+            border: 1px solid #333;
+            padding: 8px 15px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .description, .reviews, .related-books {
+            margin-bottom: 20px;
+        }
+        .text-box {
+            border: 1px solid #333;
+            padding: 10px;
+            background-color: #eee;
+            margin-bottom: 10px;
+        }
+        .related-books-grid {
+            display: flex;
+            gap: 10px;
+        }
+        .related-book-item {
+            border: 1px solid #333;
+            width: 150px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eee;
+        }
+    </style>
 </head>
 <body>
 
-<div class="page-container">
-
-  <!-- HEADER (Present on all pages) -->
-  <header>
-    <div class="logo">Logo</div>
-    <div class="cart-area">
-      <div class="cart-box"></div> <!-- Placeholder for cart icon -->
-      <span>Cart</span>
-    </div>
-  </header>
-
-  <!-- NAV BAR (Present on all pages) -->
-  <nav>
-    <!-- I added onclick handlers to simulate navigation between your wireframes -->
-    <a onclick="showPage('home')">Home</a>
-    <a onclick="showPage('shop')">Shop</a>
-    <a href="#">About</a>
-    <a href="#">Categories</a>
-    <a href="#">Contact</a>
-    
-    <!-- Breadcrumb simulation for product page -->
-    <span id="nav-arrow" style="display:none;">&rarr;</span> 
-    <a id="nav-booktitle" onclick="showPage('product')" style="display:none;">Book Title</a>
-  </nav>
-
-  <!-- ========================================== -->
-  <!-- PAGE 1: HOME (Based on image_fd1860.png) -->
-  <!-- ========================================== -->
-  <div id="home" class="page-section active-page">
-    <div class="content-padding">
-      
-      <!-- Hero Text -->
-      <div class="hero-text">
-        Cardical Books is a Family-Owned business that focuses on student success. 
-        This website provides students with affordable and easily accessible textbooks...
-      </div>
-
-      <h2 style="text-align:center; margin-bottom: 30px;">Featured Books</h2>
-
-      <!-- Featured Books Grid -->
-      <div class="featured-grid">
-        
-        <!-- Box 1: Math -->
-        <!-- USER: Change 'href' below to the actual link for the Math book page -->
-        <a href="#" onclick="showPage('product')" class="img-link-box">
-          <!-- USER: Replace 'Place Image Here' text or styling with an <img src="..."> tag -->
-          <div class="placeholder-img">Image Area</div>
-          <div class="featured-label">math</div>
-        </a>
-
-        <!-- Box 2: History -->
-        <!-- USER: Change 'href' below to the actual link for the History book page -->
-        <a href="#" onclick="showPage('product')" class="img-link-box">
-          <!-- USER: Replace 'Place Image Here' text or styling with an <img src="..."> tag -->
-          <div class="placeholder-img">Image Area</div>
-          <div class="featured-label">History</div>
-        </a>
-
-        <!-- Box 3: Science -->
-        <!-- USER: Change 'href' below to the actual link for the Science book page -->
-        <a href="#" onclick="showPage('product')" class="img-link-box">
-          <!-- USER: Replace 'Place Image Here' text or styling with an <img src="..."> tag -->
-          <div class="placeholder-img">Image Area</div>
-          <div class="featured-label">science</div>
-        </a>
-
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ========================================== -->
-  <!-- PAGE 2: SHOP (Based on image_fd1b8a.png) -->
-  <!-- ========================================== -->
-  <div id="shop" class="page-section">
-    <div class="content-padding">
-      
-      <!-- Sidebar Layout -->
-      <div class="shop-layout">
-        <div class="shop-sidebar">
-          <h2>Titles</h2>
-          <br>
-          <h3>Sort</h3>
-          <p>Newest</p>
-          <p>Popular</p>
-          <p>Price &uarr;</p>
+    <div class="container" id="mainPage">
+        <div class="header">
+            <div class="logo">Logo</div>
+            <div class="cart">Cart</div>
         </div>
-        
-        <div class="shop-main">
-          <!-- USER: This is the large "purple" box from your screenshot -->
-          <!-- Use this area to display a grid of products later -->
-          <div style="width:100%; height:100%; background:#fff;"></div>
+        <div class="nav">
+            <a href="#" onclick="showPage('mainPage')">Home</a>
+            <a href="#" onclick="showPage('shopPage')">Shop</a>
+            <a href="#">About</a>
+            <a href="#">Categories</a>
+            <a href="#">Contact</a>
         </div>
-      </div>
-
-      <!-- Testimonials -->
-      <div style="text-align:center; margin: 40px 0;">
-        <h2>Testimonials</h2>
-        <p style="font-size: 18px;">“Great Selection”- Jane D.</p>
-      </div>
-
-      <!-- Newsletter -->
-      <div class="newsletter-box">
-        <h2>Newsletter Signup</h2>
-        <form onsubmit="alert('Subscribed!'); return false;">
-          <input type="email" placeholder="Email" class="input-field">
-          <button type="submit" class="btn">Subscribe</button>
-        </form>
-      </div>
-
+        <div class="about-section">
+            Cardical Books is a Family-Owned business that focuses on student success. This website provides students with affordable and easily accessible textbooks, we aim to ease the burden of first-year confusion and help smooth the transition to Ball State University. A successful visit means a customer easily finds a book they need, while supporting a local business, and leaves feeling connected to our community of readers.
+        </div>
+        <div class="featured-books">
+            <h2>Featured Books</h2>
+            <div class="book-grid">
+                <button class="book-item" onclick="showBookDetail('math')">
+                    <div class="book-image">https://m.media-amazon.com/images/I/51eqmYlBw-L._SY445_SX342_FMwebp_.jpg</div>
+                    <p>math</p>
+                </button>
+                <button class="book-item" onclick="showBookDetail('history')">
+                    <div class="book-image">https://open.umn.edu/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJraTNtbG1pNWkyc280bDZjdjlmMmE3enk5cnFnIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiU2NyZWVuIFNob3QgMjAyNS0wOC0xNSBhdCAzLjIwLjU4IFBNLndlYnBcIjsgZmlsZW5hbWUqPVVURi04JydTY3JlZW4lMjBTaG90JTIwMjAyNS0wOC0xNSUyMGF0JTIwMy4yMC41OCUyMFBNLndlYnAiLCJjb250ZW50X3R5cGUiOiJpbWFnZS93ZWJwIiwic2VydmljZV9uYW1lIjoibmZzX3Byb2R1Y3Rpb24ifSwiZXhwIjoiMjAyNS0xMS0xOFQxNTo0MToyNS4wNTdaIiwicHVyIjoiYmxvYl9rZXkifX0=--c1a5c3c176d5ee07ab8bb974503972b2ee840989/Screen%20Shot%202025-08-15%20at%203.20.58%20PM.webp</div>
+                    <p>History</p>
+                </button>
+                <button class="book-item" onclick="showBookDetail('science')">
+                    <div class="book-image">https://geochristian.com/wp-content/uploads/2014/10/earth-science01.jpg</div>
+                    <p>science</p>
+                </button>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="#">About</a>
+            <a href="#">FAQ</a>
+            <a href="#">Contact</a>
+            <a href="#">Terms and policy</a>
+        </div>
     </div>
-  </div>
 
-
-  <!-- ========================================== -->
-  <!-- PAGE 3: PRODUCT (Based on Screenshot...) -->
-  <!-- ========================================== -->
-  <div id="product" class="page-section">
-    <div class="content-padding">
-      
-      <div class="product-top">
-        <!-- Product Image Box -->
-        <!-- USER: Wrap this in an <a> tag if you want the image itself to be zoomable/clickable -->
-        <div class="product-img-large">
-           <!-- USER: Insert <img src="..."> here -->
+    <div class="container" id="shopPage" style="display:none;">
+        <div class="header">
+            <div class="logo">Logo</div>
+            <div class="cart">Cart</div>
         </div>
-
-        <div class="product-info">
-          <h1>Book Title</h1>
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div> <!-- Web 1.0 stars -->
-          <h3>Price: 30.49$</h3>
-          
-          <br>
-          <!-- USER: Add your cart logic URL in href -->
-          <a href="#" class="btn">Add to Cart</a>
+        <div class="nav">
+            <a href="#" onclick="showPage('mainPage')">Home</a> &rarr; <a href="#" onclick="showPage('shopPage')">Shop</a> &rarr; Book Title
         </div>
-      </div>
-
-      <div class="description">
-        <h2>Description</h2>
-        <p>*Description of the book*</p>
-      </div>
-
-      <h3>Reviews</h3>
-      <div class="reviews-grid">
-        <!-- USER: Populate these divs with review content -->
-        <div class="review-box"></div>
-        <div class="review-box"></div>
-      </div>
-
-      <h3>Related Books</h3>
-      <div class="related-grid">
-        
-        <!-- Related 1 -->
-        <!-- USER: Add Link to Related Book 1 -->
-        <a href="#" class="img-link-box" style="height: 80px;">
-           <!-- USER: Add Image -->
-           <div style="width:100%; height:100%; background:#eee;"></div>
-        </a>
-
-        <!-- Related 2 -->
-        <!-- USER: Add Link to Related Book 2 -->
-        <a href="#" class="img-link-box" style="height: 80px;">
-           <!-- USER: Add Image -->
-           <div style="width:100%; height:100%; background:#eee;"></div>
-        </a>
-
-        <!-- Related 3 -->
-        <!-- USER: Add Link to Related Book 3 -->
-        <a href="#" class="img-link-box" style="height: 80px;">
-           <!-- USER: Add Image -->
-           <div style="width:100%; height:100%; background:#eee;"></div>
-        </a>
-
-        <!-- Related 4 -->
-        <!-- USER: Add Link to Related Book 4 -->
-        <a href="#" class="img-link-box" style="height: 80px;">
-           <!-- USER: Add Image -->
-           <div style="width:100%; height:100%; background:#eee;"></div>
-        </a>
-
-      </div>
+        <div class="shop-content">
+            <div class="sidebar">
+                <h3>Titles</h3>
+                <h4>Sort</h4>
+                <ul>
+                    <li>Newest</li>
+                    <li>Popular</li>
+                    <li>Price &uarr;</li>
+                </ul>
+                <h4>Categories</h4>
+                <ul>
+                    <li>Math</li>
+                    <li>History</li>
+                    <li>Science</li>
+                    <li>English</li>
+                    <li>Art</li>
+                </ul>
+            </div>
+            <div class="product-list">
+                <div class="product-item">
+                    <p><strong>Book Title 1</strong></p>
+                    <p>Category: Math</p>
+                    <p>Books Left: 15</p>
+                </div>
+                <div class="product-item">
+                    <p><strong>Book Title 2</strong></p>
+                    <p>Category: History</p>
+                    <p>Books Left: 8</p>
+                </div>
+                <div class="product-item">
+                    <p><strong>Book Title 3</strong></p>
+                    <p>Category: Science</p>
+                    <p>Books Left: 22</p>
+                </div>
+                <div class="product-item">
+                    <p><strong>Book Title 4</strong></p>
+                    <p>Category: Math</p>
+                    <p>Books Left: 5</p>
+                </div>
+            </div>
+        </div>
+        <div class="testimonials">
+            <h2>Testimonials</h2>
+            "Great Selection"- Jane D.
+        </div>
+        <div class="newsletter">
+            <h3>Newsletter Signup</h3>
+            <input type="email" placeholder="Email">
+            <button>Subscribe</button>
+        </div>
+        <div class="footer">
+            <a href="#">About</a>
+            <a href="#">FAQ</a>
+            <a href="#">Contact</a>
+            <a href="#">Terms and policy</a>
+        </div>
     </div>
-  </div>
 
+    <div class="container" id="bookDetailPage" style="display:none;">
+        <div class="header">
+            <div class="logo">Logo</div>
+            <div class="cart">Cart</div>
+        </div>
+        <div class="nav">
+            <span class="breadcrumb"><a href="#" onclick="showPage('mainPage')">Home</a> &rarr; <a href="#" onclick="showPage('shopPage')">Shop</a> &rarr; <span id="currentBookTitleNav">Book Title</span></span>
+        </div>
+        <div class="book-detail-content">
+            <div class="book-image-large">Image goes here</div>
+            <div class="book-info">
+                <h2 id="bookDetailTitle">Book Title</h2>
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                <p>Price: 30.49$</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        <div class="description">
+            <h3>Description</h3>
+            <div class="text-box">*Description of the book* Text goes here</div>
+        </div>
+        <div class="reviews">
+            <h3>Reviews</h3>
+            <div class="text-box">Text goes here</div>
+            <div class="text-box">Text goes here</div>
+        </div>
+        <div class="related-books">
+            <h3>Related Books</h3>
+            <div class="related-books-grid">
+                <div class="related-book-item">Text goes here</div>
+                <div class="related-book-item">Text goes here</div>
+                <div class="related-book-item">Text goes here</div>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="#">About</a>
+            <a href="#">FAQ</a>
+            <a href="#">Contact</a>
+            <a href="#">Terms and policy</a>
+        </div>
+    </div>
 
-  <!-- FOOTER (Present on all pages) -->
-  <footer>
-    <span>About</span>
-    <span>FAQ</span>
-    <span>Contact</span>
-    <span>Terms and policy</span>
-  </footer>
+    <script>
+        function showPage(pageId) {
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('shopPage').style.display = 'none';
+            document.getElementById('bookDetailPage').style.display = 'none';
+            document.getElementById(pageId).style.display = 'block';
+        }
 
-</div>
+        function showBookDetail(bookName) {
+            document.getElementById('currentBookTitleNav').innerText = bookName.charAt(0).toUpperCase() + bookName.slice(1);
+            document.getElementById('bookDetailTitle').innerText = bookName.charAt(0).toUpperCase() + bookName.slice(1);
+            showPage('bookDetailPage');
+        }
 
-<script>
-  // SIMPLE SCRIPT TO SWITCH TABS (Simulating multi-page site in one file)
-  function showPage(pageId) {
-    // Hide all pages
-    document.getElementById('home').classList.remove('active-page');
-    document.getElementById('shop').classList.remove('active-page');
-    document.getElementById('product').classList.remove('active-page');
-    
-    // Show selected page
-    document.getElementById(pageId).classList.add('active-page');
-
-    // Handle Breadcrumb visibility
-    const arrow = document.getElementById('nav-arrow');
-    const bookTitle = document.getElementById('nav-booktitle');
-    
-    if (pageId === 'product') {
-      arrow.style.display = 'inline';
-      bookTitle.style.display = 'inline';
-    } else {
-      arrow.style.display = 'none';
-      bookTitle.style.display = 'none';
-    }
-  }
-</script>
+        // Initially show the main page
+        showPage('mainPage');
+    </script>
 
 </body>
 </html>
