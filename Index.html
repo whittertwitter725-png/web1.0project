@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardical Books - Web 1.0 Edition</title>
+<style>
+    /* Modern Browser Reset 
+       This ensures the "retro" code renders predictably on modern screens.
+    */
+    body {
+        background-color: #E0E0E8; /* Light purple/grey background from wireframes */
+        margin: 0;
+        padding: 20px;
+        font-family: "Times New Roman", Times, serif;
+    }
+
+    /* Utility classes to manage the "views" in this single-file demo */
+    .page-view { display: none; }
+    #view-home { display: block; } /* Home is default */
+    
+    /* Link styling to match the era - blue unvisited, purple visited */
+    a { color: #0000EE; }
+    a:visited { color: #551A8B; }
+    
+    /* Basic form styling */
+    input[type="text"], input[type="email"] {
+        border: 2px solid #000;
+        padding: 5px;
+        background: #f0f0f0;
+    }
+    
+    button {
+        background-color: #555;
+        color: white;
+        border: 2px solid #000;
+        padding: 5px 15px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+    // Simple script to simulate page navigation within a single HTML file
+    function navigateTo(viewId) {
+        // Hide all views
+        var views = document.getElementsByClassName('page-view');
+        for (var i = 0; i < views.length; i++) {
+            views[i].style.display = 'none';
+        }
+        // Show requested view
+        document.getElementById(viewId).style.display = 'block';
+        
+        // Scroll to top
+        window.scrollTo(0,0);
+    }
+</script>
+</head>
+
+<body link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<!-- MAIN CONTAINER TABLE (Simulating fixed width layout) -->
+<center>
+<table width="800" border="1" bordercolor="#000000" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="box-shadow: 5px 5px 10px rgba(0,0,0,0.2);">
+
+    <!-- HEADER ROW -->
+    <tr>
+        <td height="80" valign="middle">
+            <table width="100%" cellpadding="10" border="0">
+                <tr>
+                    <td align="left">
+                        <font face="Arial, Helvetica, sans-serif" size="6"><b>Cardical Books</b></font>
+                    </td>
+                    <td align="right">
+                        <!-- Cart Button/Box -->
+                        <table border="1" cellpadding="5" cellspacing="0">
+                            <tr>
+                                <td bgcolor="#EEEEEE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td><font face="Arial" size="2"><b>Cart</b></font></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <!-- NAVIGATION BAR -->
+    <tr>
+        <td bgcolor="#EFEFEF" height="40">
+            <table width="100%" cellpadding="5" border="0">
+                <tr>
+                    <td align="center" width="16%">
+                        <a href="javascript:navigateTo('view-home')"><font face="Arial" size="3" color="#000000">Home</font></a>
+                    </td>
+                    <td align="center" width="16%">
+                         <font face="Arial" size="3" color="#000000">&rarr;</font>
+                    </td>
+                    <td align="center" width="16%">
+                        <a href="javascript:navigateTo('view-shop')"><font face="Arial" size="3" color="#000000">Shop</font></a>
+                    </td>
+                    <td align="center" width="16%">
+                        <a href="javascript:navigateTo('view-product')"><font face="Arial" size="3" color="#000000">Book Title</font></a>
+                    </td>
+                    <td align="center" width="16%">
+                        <a href="#"><font face="Arial" size="3" color="#000000">About</font></a>
+                    </td>
+                    <td align="center" width="16%">
+                        <a href="#"><font face="Arial" size="3" color="#000000">Contact</font></a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <!-- CONTENT AREA -->
+    <tr>
+        <td valign="top" height="500" style="padding: 20px;">
+
+            <!-- ==================== HOME PAGE VIEW ==================== -->
+            <div id="view-home" class="page-view">
+                <center>
+                    <!-- Intro Text Box -->
+                    <table width="90%" bgcolor="#F5F5F5" cellpadding="15" border="0">
+                        <tr>
+                            <td>
+                                <font face="Arial" size="3">
+                                    Cardical Books is a Family-Owned business that focuses on student success. This website provides students with affordable and easily accessible textbooks, we aim to ease the burden of first-year confusion and help smooth the transition to Ball State University. A successful visit means a customer easily finds a book they need, while supporting a local business, and leaves feeling connected to our community of readers.
+                                </font>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <br><br>
+                    <font face="Arial" size="6">Featured Books</font>
+                    <br><br>
+
+                    <!-- Featured Grid -->
+                    <table width="100%" cellpadding="10" border="0">
+                        <tr>
+                            <td align="center" valign="top" width="33%">
+                                <table border="1" cellpadding="0" cellspacing="0" width="150">
+                                    <tr>
+                                        <td>
+                                            <a href="javascript:navigateTo('view-product')">
+                                                <!-- Placeholder Image -->
+                                                <img src="https://placehold.co/150x120/white/black?text=Math" width="150" height="120" border="0" alt="Math Book">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <font face="Arial" size="3">math</font>
+                            </td>
+                            <td align="center" valign="top" width="33%">
+                                <table border="1" cellpadding="0" cellspacing="0" width="150">
+                                    <tr>
+                                        <td>
+                                            <a href="javascript:navigateTo('view-product')">
+                                                <img src="https://placehold.co/150x120/white/black?text=History" width="150" height="120" border="0" alt="History Book">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <font face="Arial" size="3">History</font>
+                            </td>
+                            <td align="center" valign="top" width="33%">
+                                <table border="1" cellpadding="0" cellspacing="0" width="150">
+                                    <tr>
+                                        <td>
+                                            <a href="javascript:navigateTo('view-product')">
+                                                <img src="https://placehold.co/150x120/white/black?text=Science" width="150" height="120" border="0" alt="Science Book">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <font face="Arial" size="3">science</font>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+            </div>
+
+            <!-- ==================== SHOP / CATEGORY VIEW ==================== -->
+            <div id="view-shop" class="page-view">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <!-- Left Sidebar -->
+                        <td width="25%" valign="top" bgcolor="#EEEEEE">
+                            <table width="100%" cellpadding="10" border="1" bordercolor="#999999">
+                                <tr>
+                                    <td>
+                                        <font face="Arial" size="5">Titles</font>
+                                        <br><br><br>
+                                        <font face="Arial" size="4"><b>Sort</b></font>
+                                        <br>
+                                        <font face="Arial" size="2">
+                                        <a href="#" style="text-decoration:none; color:black;">Newest</a><br>
+                                        <a href="#" style="text-decoration:none; color:black;">Popular</a><br>
+                                        <a href="#" style="text-decoration:none; color:black;">Price &uarr;</a>
+                                        </font>
+                                        <br><br><br>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        
+                        <!-- Spacer -->
+                        <td width="2%"></td>
+
+                        <!-- Main Content Area (Purple Box) -->
+                        <td width="73%" valign="top">
+                            <table width="100%" height="300" border="2" bordercolor="#9F5FFF" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="center" valign="middle">
+                                        <a href="javascript:navigateTo('view-product')">
+                                            <img src="https://placehold.co/400x250/white/9F5FFF?text=Product+Grid+Placeholder" border="0" alt="Shop Content">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <br><br>
+                <center>
+                    <font face="Arial" size="6"><b>Testimonials</b></font>
+                    <br>
+                    <font face="Arial" size="4">"Great Selection" - Jane D.</font>
+                </center>
+                <br><br>
+
+                <!-- Newsletter Box -->
+                <table width="100%" border="1" cellpadding="20" cellspacing="0">
+                    <tr>
+                        <td align="center">
+                            <font face="Arial" size="5">Newsletter Signup</font>
+                            <br><br>
+                            <form>
+                                <input type="email" placeholder="Email" size="30">
+                                <button type="button" onclick="alert('Subscribed!')">Subscribe</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- ==================== PRODUCT PAGE VIEW ==================== -->
+            <div id="view-product" class="page-view">
+                <table width="100%" border="0" cellpadding="10">
+                    <tr>
+                        <!-- Product Image Left -->
+                        <td width="40%" valign="top">
+                            <table border="1" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td>
+                                        <a href="#">
+                                            <img src="https://placehold.co/300x350/white/black?text=Book+Cover" width="100%" border="0" alt="Book Cover">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        
+                        <!-- Product Details Right -->
+                        <td width="60%" valign="top">
+                            <font face="Arial" size="6"><b>Book Title</b></font>
+                            <br>
+                            <font size="4" color="#F5A623">★★★★★</font>
+                            <br>
+                            <font face="Arial" size="4"><b>Price: 30.49$</b></font>
+                            <br><br>
+                            <button type="button" style="background:#444; color:white; padding:10px 20px; font-size:16px;">Add to Cart</button>
+                            
+                            <br><br>
+                            <font face="Arial" size="5">Description</font>
+                            <br>
+                            <font face="Arial" size="3">*Description of the book*</font>
+                        </td>
+                    </tr>
+                </table>
+
+                <br>
+                <font face="Arial" size="4"><b>Reviews</b></font>
+                <br>
+                <!-- Reviews Row -->
+                <table width="100%" cellpadding="5" cellspacing="5" border="0">
+                    <tr>
+                        <td width="50%">
+                            <table width="100%" height="80" bgcolor="#EEEEEE" border="1" cellpadding="5">
+                                <tr>
+                                    <td valign="top"><a href="#"><img src="https://placehold.co/50x50/ddd/999?text=User" align="left" hspace="5" border="0"></a> <font size="2">Great book!</font></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="50%">
+                            <table width="100%" height="80" bgcolor="#EEEEEE" border="1" cellpadding="5">
+                                <tr>
+                                    <td valign="top"><a href="#"><img src="https://placehold.co/50x50/ddd/999?text=User" align="left" hspace="5" border="0"></a> <font size="2">Loved it.</font></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <br>
+                <font face="Arial" size="4"><b>Related Books</b></font>
+                <br>
+                <!-- Related Row -->
+                <table width="100%" cellpadding="5" cellspacing="5" border="0">
+                    <tr>
+                        <td width="25%">
+                            <table width="100%" height="80" bgcolor="#EEEEEE" border="1">
+                                <tr><td align="center"><a href="#"><img src="https://placehold.co/80x60/ddd/999?text=Book" border="0"></a></td></tr>
+                            </table>
+                        </td>
+                        <td width="25%">
+                            <table width="100%" height="80" bgcolor="#EEEEEE" border="1">
+                                <tr><td align="center"><a href="#"><img src="https://placehold.co/80x60/ddd/999?text=Book" border="0"></a></td></tr>
+                            </table>
+                        </td>
+                        <td width="25%">
+                            <table width="100%" height="80" bgcolor="#EEEEEE" border="1">
+                                <tr><td align="center"><a href="#"><img src="https://placehold.co/80x60/ddd/999?text=Book" border="0"></a></td></tr>
+                            </table>
+                        </td>
+                        <td width="25%">
+                            <table width="100%" height="80" bgcolor="#EEEEEE" border="1">
+                                <tr><td align="center"><a href="#"><img src="https://placehold.co/80x60/ddd/999?text=Book" border="0"></a></td></tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </td>
+    </tr>
+
+    <!-- FOOTER -->
+    <tr>
+        <td bgcolor="#CCCCCC" height="60" align="center" valign="middle">
+            <table width="80%" border="0">
+                <tr>
+                    <td align="center"><a href="#"><font face="Arial" size="2" color="#000000">About</font></a></td>
+                    <td align="center"><a href="#"><font face="Arial" size="2" color="#000000">FAQ</font></a></td>
+                    <td align="center"><a href="#"><font face="Arial" size="2" color="#000000">Contact</font></a></td>
+                    <td align="center"><a href="#"><font face="Arial" size="2" color="#000000">Terms and Policy</font></a></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+</table>
+</center>
+<br><br>
+
+</body>
+</html>
