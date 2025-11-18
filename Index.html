@@ -1,357 +1,499 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Cardical Books</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardical Books - Web 1.0 Edition</title>
     <style>
         body {
-            font-family: monospace;
-            background-color: #f0f0f0;
-            color: #333;
+            font-family: 'Times New Roman', serif;
             margin: 0;
             padding: 0;
+            background-color: #f0f0f0; /* Light gray background */
+            color: #333;
+            line-height: 1.6;
         }
         .container {
-            width: 800px;
+            width: 80%;
             margin: 20px auto;
             background-color: #fff;
-            border: 1px solid #333;
-            padding: 10px;
+            border: 1px solid #000;
+            padding: 20px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
         }
-        .header {
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #333;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
-        .header .logo {
-            font-size: 24px;
+        header .logo {
+            font-size: 2em;
             font-weight: bold;
         }
-        .nav {
-            border: 1px solid #333;
-            padding: 5px;
-            margin-bottom: 10px;
-            display: flex;
-            gap: 15px;
-        }
-        .nav a {
-            text-decoration: none;
-            color: #333;
-        }
-        .about-section {
-            border: 1px solid #333;
-            background-color: #eee;
-            padding: 10px;
+        nav {
+            border: 1px solid #000;
             margin-bottom: 20px;
+            padding: 5px 0;
+            display: flex;
+            justify-content: space-around;
+            background-color: #eee;
+        }
+        nav a {
+            text-decoration: none;
+            color: #000;
+            padding: 5px 10px;
+            border-right: 1px solid #ccc;
+            white-space: nowrap;
+        }
+        nav a:last-child {
+            border-right: none;
+        }
+        nav a:hover {
+            background-color: #ddd;
+        }
+        .hero-section {
+            border: 1px solid #000;
+            padding: 15px;
+            background-color: #f9f9f9;
+            margin-bottom: 30px;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 1px dotted #ccc;
+            padding-bottom: 5px;
         }
         .featured-books {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .book-grid {
             display: flex;
             justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
         }
         .book-item {
-            border: 1px solid #333;
+            border: 1px solid #000;
+            width: 28%; /* Roughly a third, with some spacing */
+            margin: 1%;
             padding: 10px;
             text-align: center;
-            width: 150px;
-            background-color: #eee;
+            background-color: #fdfdfd;
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
         }
         .book-item img {
-            width: 100px;
-            height: 100px;
-            border: 1px solid #333;
-            margin-bottom: 5px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
         }
-        .footer {
-            border-top: 1px solid #333;
-            padding-top: 10px;
-            margin-top: 20px;
+        .book-item span {
+            display: block;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        footer {
+            border-top: 1px solid #000;
+            padding-top: 15px;
+            margin-top: 30px;
             display: flex;
             justify-content: space-around;
-            background-color: #ccc;
+            background-color: #eee;
             padding: 10px;
         }
-        .footer a {
+        footer a {
             text-decoration: none;
-            color: #333;
+            color: #000;
+            padding: 5px 10px;
+            border-right: 1px solid #ccc;
+            white-space: nowrap;
+        }
+        footer a:last-child {
+            border-right: none;
+        }
+        .hidden {
+            display: none;
         }
 
-        /* Page 2 Specific Styles */
+        /* Shop Page Specific Styles */
         .shop-content {
             display: flex;
+            justify-content: space-between;
         }
-        .sidebar {
-            width: 200px;
-            border: 1px solid #333;
-            padding: 10px;
-            margin-right: 10px;
+        .shop-sidebar {
+            width: 25%;
+            border: 1px solid #000;
+            padding: 15px;
+            margin-right: 20px;
+            background-color: #f9f9f9;
         }
-        .product-list {
-            flex-grow: 1;
-            border: 1px solid #333;
-            padding: 10px;
+        .shop-sidebar h3 {
+            text-align: left;
+            border-bottom: 1px solid #000;
+            margin-top: 0;
+            padding-bottom: 5px;
         }
-        .product-item {
-            border: 1px solid #ccc;
-            padding: 5px;
-            margin-bottom: 5px;
-            background-color: #eee;
+        .shop-sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
         }
-        .newsletter {
-            text-align: center;
-            margin-top: 20px;
-            border: 1px solid #333;
-            padding: 10px;
-            background-color: #eee;
-        }
-        .newsletter input[type="email"] {
-            border: 1px solid #333;
-            padding: 5px;
-        }
-        .newsletter button {
-            border: 1px solid #333;
-            background-color: #666;
-            color: #fff;
-            padding: 5px 10px;
+        .shop-sidebar ul li {
+            margin-bottom: 8px;
             cursor: pointer;
         }
-        .testimonials {
-            text-align: center;
-            margin-top: 20px;
+        .shop-sidebar ul li:hover {
+            text-decoration: underline;
         }
-        .breadcrumb {
+        .book-list {
+            width: 70%;
+            border: 1px solid #990099; /* Purple border for the content area */
+            padding: 15px;
+            min-height: 400px; /* Placeholder height */
+            background-color: #fff;
+        }
+        .book-item-shop {
+            border: 1px solid #ccc;
+            padding: 10px;
             margin-bottom: 10px;
+            background-color: #fefefe;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Page 3 Specific Styles */
+        /* Book Detail Page Specific Styles */
         .book-detail-content {
             display: flex;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
-        .book-image-large {
-            border: 1px solid #333;
-            width: 200px;
-            height: 250px;
+        .book-detail-image-box {
+            width: 35%;
+            border: 1px solid #000;
             margin-right: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #eee;
+            background-color: #f9f9f9;
+            min-height: 250px;
+        }
+        .book-detail-image-box img {
+            max-width: 90%;
+            max-height: 90%;
+            display: block;
+            border: 1px solid #ccc;
         }
         .book-info {
-            flex-grow: 1;
+            width: 60%;
         }
         .book-info h2 {
+            text-align: left;
             margin-top: 0;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
         }
-        .stars {
+        .book-rating {
+            font-size: 1.5em;
             color: gold;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
         }
-        .add-to-cart {
-            background-color: #666;
+        .book-price {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .add-to-cart-btn {
+            background-color: #555;
             color: #fff;
-            border: 1px solid #333;
-            padding: 8px 15px;
+            padding: 10px 20px;
+            border: none;
             cursor: pointer;
-            margin-top: 10px;
-        }
-        .description, .reviews, .related-books {
+            font-size: 1.1em;
             margin-bottom: 20px;
         }
-        .text-box {
-            border: 1px solid #333;
-            padding: 10px;
-            background-color: #eee;
-            margin-bottom: 10px;
+        .add-to-cart-btn:hover {
+            background-color: #777;
         }
-        .related-books-grid {
-            display: flex;
-            gap: 10px;
+        .description-box, .review-box, .related-book-box {
+            border: 1px solid #000;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
         }
-        .related-book-item {
-            border: 1px solid #333;
-            width: 150px;
-            height: 100px;
+        .reviews-container, .related-books-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #eee;
+            justify-content: space-between;
+            margin-top: 10px;
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        }
+        .review-box, .related-book-box {
+            width: 48%; /* Adjust for spacing */
+            min-height: 80px;
+        }
+        .related-book-box {
+            width: 30%; /* Three items per row */
+            min-height: 100px;
+        }
+        .newsletter-signup {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px solid #000;
+            background-color: #f0f0f0;
+        }
+        .newsletter-signup input[type="email"] {
+            padding: 8px;
+            width: 250px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+        .newsletter-signup button {
+            padding: 8px 15px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .newsletter-signup button:hover {
+            background-color: #777;
+        }
+        .testimonials {
+            text-align: center;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 1.2em;
         }
     </style>
 </head>
 <body>
 
-    <div class="container" id="mainPage">
-        <div class="header">
+    <div class="container">
+        <header>
             <div class="logo">Logo</div>
             <div class="cart">Cart</div>
-        </div>
-        <div class="nav">
-            <a href="#" onclick="showPage('mainPage')">Home</a>
+        </header>
+
+        <nav>
+            <a href="#" onclick="showPage('homePage')">Home</a>
             <a href="#" onclick="showPage('shopPage')">Shop</a>
-            <a href="#">About</a>
-            <a href="#">Categories</a>
-            <a href="#">Contact</a>
-        </div>
-        <div class="about-section">
-            Cardical Books is a Family-Owned business that focuses on student success. This website provides students with affordable and easily accessible textbooks, we aim to ease the burden of first-year confusion and help smooth the transition to Ball State University. A successful visit means a customer easily finds a book they need, while supporting a local business, and leaves feeling connected to our community of readers.
-        </div>
-        <div class="featured-books">
+            <a href="#" onclick="showPage('aboutPage')">About</a>
+            <a href="#" onclick="showPage('categoriesPage')">Categories</a>
+            <a href="#" onclick="showPage('contactPage')">Contact</a>
+        </nav>
+
+        <div id="homePage">
+            <div class="hero-section">
+                Cardical Books is a Family-Owned business that focuses on student success. This website provides students with affordable and easily accessible textbooks, we aim to ease the burden of first-year confusion and help smooth the transition to Ball State University. A successful visit means a customer easily finds a book they need, while supporting a local business, and leaves feeling connected to our community of readers.
+            </div>
+
             <h2>Featured Books</h2>
-            <div class="book-grid">
-                <button class="book-item" onclick="showBookDetail('math')">
-                    <div class="book-image">https://m.media-amazon.com/images/I/51eqmYlBw-L._SY445_SX342_FMwebp_.jpg</div>
-                    <p>math</p>
-                </button>
-                <button class="book-item" onclick="showBookDetail('history')">
-                    <div class="book-image">https://open.umn.edu/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJraTNtbG1pNWkyc280bDZjdjlmMmE3enk5cnFnIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiU2NyZWVuIFNob3QgMjAyNS0wOC0xNSBhdCAzLjIwLjU4IFBNLndlYnBcIjsgZmlsZW5hbWUqPVVURi04JydTY3JlZW4lMjBTaG90JTIwMjAyNS0wOC0xNSUyMGF0JTIwMy4yMC41OCUyMFBNLndlYnAiLCJjb250ZW50X3R5cGUiOiJpbWFnZS93ZWJwIiwic2VydmljZV9uYW1lIjoibmZzX3Byb2R1Y3Rpb24ifSwiZXhwIjoiMjAyNS0xMS0xOFQxNTo0MToyNS4wNTdaIiwicHVyIjoiYmxvYl9rZXkifX0=--c1a5c3c176d5ee07ab8bb974503972b2ee840989/Screen%20Shot%202025-08-15%20at%203.20.58%20PM.webp</div>
-                    <p>History</p>
-                </button>
-                <button class="book-item" onclick="showBookDetail('science')">
-                    <div class="book-image">https://geochristian.com/wp-content/uploads/2014/10/earth-science01.jpg</div>
-                    <p>science</p>
-                </button>
+            <div class="featured-books">
+                <div class="book-item" onclick="showBookDetail('math')">
+                    <img src="https://m.media-amazon.com/images/I/51eqmYlBw-L._SY445_SX342_FMwebp_.jpg" alt="Math Book Cover">
+                    <span>math</span>
+                </div>
+                <div class="book-item" onclick="showBookDetail('history')">
+                    <img src="https://www.mheducation.com/cover-images/Webp_400-wide/0079023029.webp" alt="History Book Cover">
+                    <span>History</span>
+                </div>
+                <div class="book-item" onclick="showBookDetail('science')">
+                    <img src="https://geochristian.com/wp-content/uploads/2014/10/earth-science01.jpg" alt="Science Book Cover">
+                    <span>science</span>
+                </div>
             </div>
         </div>
-        <div class="footer">
-            <a href="#">About</a>
-            <a href="#">FAQ</a>
-            <a href="#">Contact</a>
-            <a href="#">Terms and policy</a>
-        </div>
-    </div>
 
-    <div class="container" id="shopPage" style="display:none;">
-        <div class="header">
-            <div class="logo">Logo</div>
-            <div class="cart">Cart</div>
-        </div>
-        <div class="nav">
-            <a href="#" onclick="showPage('mainPage')">Home</a> &rarr; <a href="#" onclick="showPage('shopPage')">Shop</a> &rarr; Book Title
-        </div>
-        <div class="shop-content">
-            <div class="sidebar">
-                <h3>Titles</h3>
-                <h4>Sort</h4>
-                <ul>
-                    <li>Newest</li>
-                    <li>Popular</li>
-                    <li>Price &uarr;</li>
-                </ul>
-                <h4>Categories</h4>
-                <ul>
-                    <li>Math</li>
-                    <li>History</li>
-                    <li>Science</li>
-                    <li>English</li>
-                    <li>Art</li>
-                </ul>
-            </div>
-            <div class="product-list">
-                <div class="product-item">
-                    <p><strong>Book Title 1</strong></p>
-                    <p>Category: Math</p>
-                    <p>Books Left: 15</p>
-                </div>
-                <div class="product-item">
-                    <p><strong>Book Title 2</strong></p>
-                    <p>Category: History</p>
-                    <p>Books Left: 8</p>
-                </div>
-                <div class="product-item">
-                    <p><strong>Book Title 3</strong></p>
-                    <p>Category: Science</p>
-                    <p>Books Left: 22</p>
-                </div>
-                <div class="product-item">
-                    <p><strong>Book Title 4</strong></p>
-                    <p>Category: Math</p>
-                    <p>Books Left: 5</p>
-                </div>
-            </div>
-        </div>
-        <div class="testimonials">
-            <h2>Testimonials</h2>
-            "Great Selection"- Jane D.
-        </div>
-        <div class="newsletter">
-            <h3>Newsletter Signup</h3>
-            <input type="email" placeholder="Email">
-            <button>Subscribe</button>
-        </div>
-        <div class="footer">
-            <a href="#">About</a>
-            <a href="#">FAQ</a>
-            <a href="#">Contact</a>
-            <a href="#">Terms and policy</a>
-        </div>
-    </div>
+        <div id="shopPage" class="hidden">
+            <nav style="margin-bottom: 20px;">
+                <a href="#" onclick="showPage('homePage')">Home</a>
+                <a href="#" class="current-page"> <span style="font-size: 1.5em; vertical-align: middle;">&rarr;</span> Shop</a>
+                </nav>
 
-    <div class="container" id="bookDetailPage" style="display:none;">
-        <div class="header">
-            <div class="logo">Logo</div>
-            <div class="cart">Cart</div>
-        </div>
-        <div class="nav">
-            <span class="breadcrumb"><a href="#" onclick="showPage('mainPage')">Home</a> &rarr; <a href="#" onclick="showPage('shopPage')">Shop</a> &rarr; <span id="currentBookTitleNav">Book Title</span></span>
-        </div>
-        <div class="book-detail-content">
-            <div class="book-image-large">Image goes here</div>
-            <div class="book-info">
-                <h2 id="bookDetailTitle">Book Title</h2>
-                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-                <p>Price: 30.49$</p>
-                <button class="add-to-cart">Add to Cart</button>
+            <div class="shop-content">
+                <div class="shop-sidebar">
+                    <h3>Titles</h3>
+                    <h3>Sort</h3>
+                    <ul>
+                        <li onclick="sortBooks('newest')">Newest</li>
+                        <li onclick="sortBooks('popular')">Popular</li>
+                        <li onclick="sortBooks('price')">Price <span style="font-size: 0.8em;">&uarr;</span></li>
+                    </ul>
+                    <h3>Categories</h3>
+                    <ul>
+                        <li>Math</li>
+                        <li>History</li>
+                        <li>Science</li>
+                        <li>Literature</li>
+                        <li>Physics</li>
+                    </ul>
+                    <h3>Availability</h3>
+                    <ul>
+                        <li>In Stock (15)</li>
+                        <li>Out of Stock (3)</li>
+                    </ul>
+                </div>
+                <div class="book-list" id="bookListContainer">
+                    <div class="book-item-shop">Book Title 1 <br> Category: Math <br> Available: 5</div>
+                    <div class="book-item-shop">Book Title 2 <br> Category: Science <br> Available: 3</div>
+                    <div class="book-item-shop">Book Title 3 <br> Category: History <br> Available: 8</div>
+                    <div class="book-item-shop">Book Title 4 <br> Category: Math <br> Available: 2</div>
+                    <div class="book-item-shop">Book Title 5 <br> Category: Literature <br> Available: 10</div>
+                </div>
+            </div>
+
+            <div class="testimonials">
+                "Great Selection"- Jane D.
+            </div>
+
+            <div class="newsletter-signup">
+                <h3>Newsletter Signup</h3>
+                <input type="email" placeholder="Email">
+                <button>Subscribe</button>
             </div>
         </div>
-        <div class="description">
-            <h3>Description</h3>
-            <div class="text-box">*Description of the book* Text goes here</div>
-        </div>
-        <div class="reviews">
+
+        <div id="bookDetailPage" class="hidden">
+            <nav style="margin-bottom: 20px;">
+                <a href="#" onclick="showPage('homePage')">Home</a>
+                <a href="#" onclick="showPage('shopPage')"> <span style="font-size: 1.5em; vertical-align: middle;">&rarr;</span> Shop</a>
+                <a href="#" class="current-page"> <span style="font-size: 1.5em; vertical-align: middle;">&rarr;</span> <span id="currentBookTitleNav">Book Title</span></a>
+            </nav>
+
+            <div class="book-detail-content">
+                <div class="book-detail-image-box">
+                    <img id="bookDetailImage" src="" alt="Book Cover">
+                </div>
+                <div class="book-info">
+                    <h2 id="bookDetailTitle">Book Title</h2>
+                    <div class="book-rating">★★★★★</div>
+                    <div class="book-price">Price: <span id="bookDetailPrice">30.49$</span></div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+
+                    <h3>Description</h3>
+                    <div class="description-box">
+                        <p id="bookDetailDescription">This is a placeholder description for the book. It would contain details about the content, author, edition, and any other relevant information for a potential buyer.</p>
+                    </div>
+                </div>
+            </div>
+
             <h3>Reviews</h3>
-            <div class="text-box">Text goes here</div>
-            <div class="text-box">Text goes here</div>
-        </div>
-        <div class="related-books">
+            <div class="reviews-container">
+                <div class="review-box">
+                    <p>Review 1: "Great book, very helpful for my studies!" - A. Student</p>
+                </div>
+                <div class="review-box">
+                    <p>Review 2: "Clear explanations and good examples." - B. Reader</p>
+                </div>
+            </div>
+
             <h3>Related Books</h3>
-            <div class="related-books-grid">
-                <div class="related-book-item">Text goes here</div>
-                <div class="related-book-item">Text goes here</div>
-                <div class="related-book-item">Text goes here</div>
+            <div class="related-books-container">
+                <div class="related-book-box">
+                    <p>Related Book 1</p>
+                </div>
+                <div class="related-book-box">
+                    <p>Related Book 2</p>
+                </div>
+                <div class="related-book-box">
+                    <p>Related Book 3</p>
+                </div>
             </div>
         </div>
-        <div class="footer">
+
+        <footer>
             <a href="#">About</a>
             <a href="#">FAQ</a>
             <a href="#">Contact</a>
             <a href="#">Terms and policy</a>
-        </div>
+        </footer>
     </div>
 
     <script>
+        const pages = ['homePage', 'shopPage', 'bookDetailPage', 'aboutPage', 'categoriesPage', 'contactPage'];
+
+        // Initial state: show home page
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('homePage');
+        });
+
         function showPage(pageId) {
-            document.getElementById('mainPage').style.display = 'none';
-            document.getElementById('shopPage').style.display = 'none';
-            document.getElementById('bookDetailPage').style.display = 'none';
-            document.getElementById(pageId).style.display = 'block';
+            pages.forEach(id => {
+                const page = document.getElementById(id);
+                if (page) {
+                    page.classList.add('hidden');
+                }
+            });
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.remove('hidden');
+            }
         }
 
-        function showBookDetail(bookName) {
-            document.getElementById('currentBookTitleNav').innerText = bookName.charAt(0).toUpperCase() + bookName.slice(1);
-            document.getElementById('bookDetailTitle').innerText = bookName.charAt(0).toUpperCase() + bookName.slice(1);
+        function showBookDetail(bookType) {
+            let title = '';
+            let imageUrl = '';
+            let price = '';
+            let description = 'This is a placeholder description for the book. It would contain details about the content, author, edition, and any other relevant information for a potential buyer.';
+
+            if (bookType === 'math') {
+                title = 'Advanced Math Concepts';
+                imageUrl = 'https://m.media-amazon.com/images/I/51eqmYlBw-L._SY445_SX342_FMwebp_.jpg';
+                price = '45.99$';
+                description = 'Delve into the world of advanced mathematics with this comprehensive textbook. Covers calculus, linear algebra, and discrete mathematics. Ideal for university students.';
+            } else if (bookType === 'history') {
+                title = 'World History: From Antiquity to Present';
+                imageUrl = 'https://www.mheducation.com/cover-images/Webp_400-wide/0079023029.webp';
+                price = '38.25$';
+                description = 'An engaging journey through millennia of human history. Explores major civilizations, conflicts, and cultural developments. Essential reading for history enthusiasts and students.';
+            } else if (bookType === 'science') {
+                title = 'Introduction to Earth Science';
+                imageUrl = 'https://geochristian.com/wp-content/uploads/2014/10/earth-science01.jpg';
+                price = '32.70$';
+                description = 'Explore the fundamental principles of geology, meteorology, oceanography, and astronomy. This textbook provides a solid foundation in earth sciences with vivid illustrations.';
+            }
+
+            document.getElementById('bookDetailTitle').innerText = title;
+            document.getElementById('currentBookTitleNav').innerText = title; // Update book title in navigation
+            document.getElementById('bookDetailImage').src = imageUrl;
+            document.getElementById('bookDetailPrice').innerText = price;
+            document.getElementById('bookDetailDescription').innerText = description;
+
             showPage('bookDetailPage');
         }
 
-        // Initially show the main page
-        showPage('mainPage');
-    </script>
+        function sortBooks(sortType) {
+            const bookListContainer = document.getElementById('bookListContainer');
+            let books = Array.from(bookListContainer.children); // Get current list items
 
+            // Placeholder for actual sorting logic. For now, just re-order demo items.
+            if (sortType === 'newest') {
+                books.reverse(); // Simple reverse for demo
+            } else if (sortType === 'popular') {
+                // More complex sorting would go here. For demo, just shuffle slightly.
+                books = [books[2], books[0], books[4], books[1], books[3]];
+            } else if (sortType === 'price') {
+                // Assume higher prices for demo for now
+                books = [books[3], books[1], books[0], books[2], books[4]];
+            }
+
+            bookListContainer.innerHTML = ''; // Clear existing
+            books.forEach(book => bookListContainer.appendChild(book)); // Append sorted
+            alert(`Books sorted by ${sortType}! (Demo sorting applied)`);
+        }
+
+        // Placeholder for other pages, so navigation works without errors
+        // You can add content to these divs later.
+        document.getElementById('aboutPage').innerHTML = '<div class="hero-section"><h2>About Us</h2><p>text goes here</p></div>';
+        document.getElementById('categoriesPage').innerHTML = '<div class="hero-section"><h2>Categories</h2><p>text goes here</p></div>';
+        document.getElementById('contactPage').innerHTML = '<div class="hero-section"><h2>Contact Us</h2><p>text goes here</p></div>';
+
+    </script>
 </body>
 </html>
